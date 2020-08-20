@@ -20,6 +20,12 @@
   ],
   "rules": {
     "@typescript-eslint/rule-name": "off",
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      {
+        "argsIgnorePattern": "_"
+      }
+    ],
     "class-methods-use-this": "off",
     "camelcase": "off",
     "prettier/prettier": "error",

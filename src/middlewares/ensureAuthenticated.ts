@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import { verify } from 'jsonwebtoken';
 
+import AppError from '../errors/AppErrors';
 import authConfig from '../config/auth';
 
 interface TokenPaylod {
@@ -16,7 +17,9 @@ export default function ensureAuthenticated(
 ): void {
   const authHeader = req.headers.authorization;
 
-  if (!authHeader) throw new Error('Token is missing');
+  if (!authHeader) {
+    throw new AppError('Token is missing', 401);
+  }
 
   const [, token] = authHeader.split(' ');
 
@@ -33,6 +36,6 @@ export default function ensureAuthenticated(
 
     return next();
   } catch {
-    throw new Error('Invalid Token');
+    throw new AppError('Invalid Token', 401);
   }
 }
