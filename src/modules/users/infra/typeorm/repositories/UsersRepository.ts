@@ -12,6 +12,14 @@ class UsersRepository implements IUsersRepository {
     this.ormRepository = getRepository(User);
   }
 
+  public async createAndSaveUser(userData: ICreateUserDTO): Promise<User> {
+    const user = this.ormRepository.create(userData);
+
+    await this.ormRepository.save(user);
+
+    return user;
+  }
+
   public async findUserById(id: string): Promise<User | undefined> {
     const user = this.ormRepository.findOne(id);
 
@@ -22,14 +30,6 @@ class UsersRepository implements IUsersRepository {
     const user = this.ormRepository.findOne({
       where: { email },
     });
-
-    return user;
-  }
-
-  public async createAndSaveUser(userData: ICreateUserDTO): Promise<User> {
-    const user = this.ormRepository.create(userData);
-
-    await this.ormRepository.save(user);
 
     return user;
   }
