@@ -4,7 +4,7 @@ import { verify } from 'jsonwebtoken';
 import authConfig from '@config/auth';
 import AppError from '@shared/errors/AppErrors';
 
-interface TokenPaylod {
+interface ITokenPaylod {
   iat: number;
   exp: number;
   sub: string;
@@ -28,7 +28,7 @@ export default function ensureAuthenticated(
 
     const decoded = verify(token, secret);
 
-    const { sub } = decoded as TokenPaylod;
+    const { sub } = decoded as ITokenPaylod;
 
     req.user = {
       id: sub,

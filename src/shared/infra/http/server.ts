@@ -5,10 +5,12 @@ import 'express-async-errors';
 import cors from 'cors';
 
 import uploadConfig from '@config/upload';
+import AppError from '@shared/errors/AppErrors';
 
 import routes from './routes';
-import '../typeorm';
-import AppError from '../../errors/AppErrors';
+
+import '@shared/infra/typeorm';
+import '@shared/container';
 
 const app = express();
 
@@ -28,7 +30,7 @@ app.use((err: Error, req: Request, res: Response, _: NextFunction) => {
     });
   }
 
-  console.log(err);
+  console.log('==========>', err);
 
   return response.status(500).json({
     status: 'error',
