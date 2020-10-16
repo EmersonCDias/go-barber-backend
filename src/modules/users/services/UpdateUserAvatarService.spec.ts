@@ -37,7 +37,7 @@ describe('UpdateUserAvatarService', () => {
       storageProviderMOCK,
     );
 
-    expect(
+    await expect(
       updateUserAvatar.run({
         user_id: 'non-existing-user',
         avatarFileName: 'avatar.jpg',
