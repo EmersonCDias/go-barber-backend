@@ -1,4 +1,5 @@
 import { injectable, inject } from 'tsyringe';
+import { differenceInHours } from 'date-fns';
 
 import AppError from '@shared/errors/AppErrors';
 
@@ -28,14 +29,16 @@ export default class SendForgotPasswordEmailService {
   public async run({ password, token }: IRequest): Promise<void> {
     const userToken = await this.userTokenRepository.findUserByToken(token);
 
-    if (!userToken) {
-      throw new AppError('Token is missing');
-    }
+    if (!userToken) throw new AppError('Token is missing');
 
     const user = await this.usersRepository.findUserById(userToken.user_id);
 
-    if (!user) {
-      throw new AppError('User does not exists');
+    if (!user) throw new AppError('User does not exists');
+
+    const tokenCreatedAt = userToken.created_at;
+
+    if (differenceInHours(Date.now(), tokenCreatedAt) > 2) {
+      throw new AppError('Token expired');
     }
 
     user.password = await this.hashProvider.generateHash(password);

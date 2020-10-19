@@ -49,16 +49,43 @@ describe('SendForgotPasswordEmailService', () => {
     await expect(
       resetPasswordService.run({
         password: '1234mudar',
-        token: '',
+        token: 'non-existing-token',
       }),
     ).rejects.toBeInstanceOf(AppError);
   });
 
-  it('should not be able to reset the password is user is not found', async () => {
+  it('should not be able to reset the password without a valid user ', async () => {
+    const { token } = await userTokenRepositoryMOCK.generate(
+      'non-existing-user',
+    );
+
     await expect(
       resetPasswordService.run({
-        password: '1234mudar',
-        token: '',
+        password: '123mudar',
+        token,
+      }),
+    ).rejects.toBeInstanceOf(AppError);
+  });
+
+  it('should not be able to reset the password if token is expired (2h)', async () => {
+    const user = await usersRepositoryMOCK.createAndSaveUser({
+      name: 'John Doe',
+      email: 'johndoe@gmail.com',
+      password: '123mudar',
+    });
+
+    const { token } = await userTokenRepositoryMOCK.generate(user.id);
+
+    jest.spyOn(Date, 'now').mockImplementationOnce(() => {
+      const customDate = new Date();
+
+      return customDate.setHours(customDate.getHours() + 3);
+    });
+
+    await expect(
+      resetPasswordService.run({
+        password: '123mudar',
+        token,
       }),
     ).rejects.toBeInstanceOf(AppError);
   });
