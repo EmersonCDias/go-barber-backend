@@ -1,24 +1,24 @@
 import AppError from '@shared/errors/AppErrors';
 
 import UsersRepositoryMOCK from '../repositories/mocks/UsersRepositoryMOCK';
-import UserTokenRepositoryMOCK from '../repositories/mocks/UserTokenRepositoryMOCK';
+import UserTokensRepositoryMOCK from '../repositories/mocks/UserTokensRepositoryMOCK';
 import ResetPasswordService from './ResetPasswordService';
 import HashProviderMOCK from '../providers/HashProvider/mocks/HashProviderMOCK';
 
 let usersRepositoryMOCK: UsersRepositoryMOCK;
-let userTokenRepositoryMOCK: UserTokenRepositoryMOCK;
+let userTokensRepositoryMOCK: UserTokensRepositoryMOCK;
 let hashProviderMOCK: HashProviderMOCK;
 let resetPasswordService: ResetPasswordService;
 
 describe('SendForgotPasswordEmailService', () => {
   beforeEach(() => {
     usersRepositoryMOCK = new UsersRepositoryMOCK();
-    userTokenRepositoryMOCK = new UserTokenRepositoryMOCK();
+    userTokensRepositoryMOCK = new UserTokensRepositoryMOCK();
     hashProviderMOCK = new HashProviderMOCK();
 
     resetPasswordService = new ResetPasswordService(
       usersRepositoryMOCK,
-      userTokenRepositoryMOCK,
+      userTokensRepositoryMOCK,
       hashProviderMOCK,
     );
   });
@@ -30,7 +30,7 @@ describe('SendForgotPasswordEmailService', () => {
       password: '123mudar',
     });
 
-    const { token } = await userTokenRepositoryMOCK.generate(user.id);
+    const { token } = await userTokensRepositoryMOCK.generate(user.id);
 
     const generateHash = jest.spyOn(hashProviderMOCK, 'generateHash');
 
@@ -55,7 +55,7 @@ describe('SendForgotPasswordEmailService', () => {
   });
 
   it('should not be able to reset the password without a valid user ', async () => {
-    const { token } = await userTokenRepositoryMOCK.generate(
+    const { token } = await userTokensRepositoryMOCK.generate(
       'non-existing-user',
     );
 
@@ -74,7 +74,7 @@ describe('SendForgotPasswordEmailService', () => {
       password: '123mudar',
     });
 
-    const { token } = await userTokenRepositoryMOCK.generate(user.id);
+    const { token } = await userTokensRepositoryMOCK.generate(user.id);
 
     jest.spyOn(Date, 'now').mockImplementationOnce(() => {
       const customDate = new Date();

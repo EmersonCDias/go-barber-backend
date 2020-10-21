@@ -5,7 +5,7 @@ import AppError from '@shared/errors/AppErrors';
 
 // import User from '../infra/typeorm/entities/User';
 import IUsersRepository from '../repositories/IUsersRepository';
-import IUserTokenRepository from '../repositories/IUserTokenRepository';
+import IUserTokensRepository from '../repositories/IUserTokensRepository';
 import IHashProvider from '../providers/HashProvider/models/IHashProvider';
 
 interface IRequest {
@@ -19,15 +19,15 @@ export default class SendForgotPasswordEmailService {
     @inject('UsersRepository')
     private usersRepository: IUsersRepository,
 
-    @inject('UserTokenRepository')
-    private userTokenRepository: IUserTokenRepository,
+    @inject('UserTokensRepository')
+    private userTokensRepository: IUserTokensRepository,
 
     @inject('HashProvider')
     private hashProvider: IHashProvider,
   ) { }
 
   public async run({ password, token }: IRequest): Promise<void> {
-    const userToken = await this.userTokenRepository.findUserByToken(token);
+    const userToken = await this.userTokensRepository.findUserByToken(token);
 
     if (!userToken) throw new AppError('Token is missing');
 

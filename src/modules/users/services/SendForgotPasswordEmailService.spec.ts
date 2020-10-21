@@ -1,25 +1,25 @@
 import AppError from '@shared/errors/AppErrors';
 
-import MailProviderMOCK from '@shared/providers/MailProvider/mocks/MailProviderMOCK';
+import MailProviderMOCK from '@shared/container/providers/MailProvider/mocks/MailProviderMOCK';
 
 import UsersRepositoryMOCK from '../repositories/mocks/UsersRepositoryMOCK';
 import SendForgotPasswordEmailService from './SendForgotPasswordEmailService';
-import UserTokenRepositoryMOCK from '../repositories/mocks/UserTokenRepositoryMOCK';
+import UserTokensRepositoryMOCK from '../repositories/mocks/UserTokensRepositoryMOCK';
 
 let usersRepositoryMOCK: UsersRepositoryMOCK;
 let mailProviderMOCK: MailProviderMOCK;
-let userTokenRepositoryMOCK: UserTokenRepositoryMOCK;
+let userTokensRepositoryMOCK: UserTokensRepositoryMOCK;
 let sendForgotPasswordEmailService: SendForgotPasswordEmailService;
 
 describe('SendForgotPasswordEmailService', () => {
   beforeEach(() => {
     usersRepositoryMOCK = new UsersRepositoryMOCK();
     mailProviderMOCK = new MailProviderMOCK();
-    userTokenRepositoryMOCK = new UserTokenRepositoryMOCK();
+    userTokensRepositoryMOCK = new UserTokensRepositoryMOCK();
     sendForgotPasswordEmailService = new SendForgotPasswordEmailService(
       usersRepositoryMOCK,
       mailProviderMOCK,
-      userTokenRepositoryMOCK,
+      userTokensRepositoryMOCK,
     );
   });
 
@@ -48,7 +48,7 @@ describe('SendForgotPasswordEmailService', () => {
   });
 
   it('should generate a forgot password token', async () => {
-    const generateToken = jest.spyOn(userTokenRepositoryMOCK, 'generate');
+    const generateToken = jest.spyOn(userTokensRepositoryMOCK, 'generate');
 
     const user = await usersRepositoryMOCK.createAndSaveUser({
       name: 'John Doe',

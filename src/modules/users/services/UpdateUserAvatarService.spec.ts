@@ -1,6 +1,6 @@
 import AppError from '@shared/errors/AppErrors';
 
-import StorageProviderMOCK from '@shared/providers/StorageProvider/mocks/StorageProviderMOCK';
+import StorageProviderMOCK from '@shared/container/providers/StorageProvider/mocks/StorageProviderMOCK';
 import UsersRepositoryMOCK from '../repositories/mocks/UsersRepositoryMOCK';
 import UpdateUserAvatarService from './UpdateUserAvatarService';
 
