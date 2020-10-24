@@ -4,16 +4,22 @@ import UsersRepositoryMOCK from '../repositories/mocks/UsersRepositoryMOCK';
 import HashProviderMOCK from '../providers/HashProvider/mocks/HashProviderMOCK';
 import CreateUserService from './CreateUserService';
 
-describe('CreateUserService', () => {
-  it('should be able to create a new user', async () => {
-    const usersRepositoryMOCK = new UsersRepositoryMOCK();
-    const hashProviderMOCK = new HashProviderMOCK();
+let usersRepositoryMOCK: UsersRepositoryMOCK;
+let hashProviderMOCK: HashProviderMOCK;
+let createUserService: CreateUserService;
 
-    const createUserService = new CreateUserService(
+describe('CreateUserService', () => {
+  beforeEach(() => {
+    usersRepositoryMOCK = new UsersRepositoryMOCK();
+    hashProviderMOCK = new HashProviderMOCK();
+    createUserService = new CreateUserService(
       usersRepositoryMOCK,
       hashProviderMOCK,
     );
 
+  })
+
+  it('should be able to create a new user', async () => {
     const user = await createUserService.run({
       name: 'John Doe',
       email: 'johndoe@email.com',
@@ -27,14 +33,6 @@ describe('CreateUserService', () => {
   });
 
   it('should not be able to create a new user if it already exists', async () => {
-    const usersRepositoryMOCK = new UsersRepositoryMOCK();
-    const hashProviderMOCK = new HashProviderMOCK();
-
-    const createUserService = new CreateUserService(
-      usersRepositoryMOCK,
-      hashProviderMOCK,
-    );
-
     await createUserService.run({
       name: 'John Doe',
       email: 'johndoe@email.com',

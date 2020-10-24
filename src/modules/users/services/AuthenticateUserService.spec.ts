@@ -5,20 +5,26 @@ import HashProviderMOCK from '../providers/HashProvider/mocks/HashProviderMOCK';
 import AuthenticateUserService from './AuthenticateUserService';
 import CreateUserService from './CreateUserService';
 
+let usersRepositoryMOCK: UsersRepositoryMOCK;
+let hashProviderMOCK: HashProviderMOCK;
+let createUserService: CreateUserService;
+let authenticateUserService: AuthenticateUserService;
+
 describe('AuthenticateUserService', () => {
+  beforeEach(() => {
+    usersRepositoryMOCK = new UsersRepositoryMOCK();
+    hashProviderMOCK = new HashProviderMOCK();
+    createUserService = new CreateUserService(
+      usersRepositoryMOCK,
+      hashProviderMOCK,
+    );
+    authenticateUserService = new AuthenticateUserService(
+      usersRepositoryMOCK,
+      hashProviderMOCK,
+    );
+  })
+
   it('should be able to authenticate', async () => {
-    const usersRepositoryMOCK = new UsersRepositoryMOCK();
-    const hashProviderMOCK = new HashProviderMOCK();
-
-    const createUserService = new CreateUserService(
-      usersRepositoryMOCK,
-      hashProviderMOCK,
-    );
-    const authenticateUserService = new AuthenticateUserService(
-      usersRepositoryMOCK,
-      hashProviderMOCK,
-    );
-
     const user = await createUserService.run({
       name: 'John Doe',
       email: 'johndoe@email.com',
@@ -35,13 +41,6 @@ describe('AuthenticateUserService', () => {
   });
 
   it('should not be able to authenticate if user does not exists', async () => {
-    const usersRepositoryMOCK = new UsersRepositoryMOCK();
-    const hashProviderMOCK = new HashProviderMOCK();
-
-    const authenticateUserService = new AuthenticateUserService(
-      usersRepositoryMOCK,
-      hashProviderMOCK,
-    );
 
     expect(
       authenticateUserService.run({
@@ -52,18 +51,6 @@ describe('AuthenticateUserService', () => {
   });
 
   it('should not be able to authenticate if password is incorrect', async () => {
-    const usersRepositoryMOCK = new UsersRepositoryMOCK();
-    const hashProviderMOCK = new HashProviderMOCK();
-
-    const createUserService = new CreateUserService(
-      usersRepositoryMOCK,
-      hashProviderMOCK,
-    );
-    const authenticateUserService = new AuthenticateUserService(
-      usersRepositoryMOCK,
-      hashProviderMOCK,
-    );
-
     await createUserService.run({
       name: 'John Doe',
       email: 'johndoe@email.com',

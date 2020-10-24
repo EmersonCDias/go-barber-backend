@@ -1,5 +1,6 @@
 *.log
 *.error
+.vs
 .vscode
 .tmp
 node_modules

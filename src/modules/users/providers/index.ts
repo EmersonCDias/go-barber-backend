@@ -4,6 +4,6 @@ import BCriptyHashProvider from './HashProvider/implementations/BCriptyHashProvi
 import IHashProvider from './HashProvider/models/IHashProvider';
 
 container.registerSingleton<IHashProvider>(
-  'BCriptyHashProvider',
+  'HashProvider',
   BCriptyHashProvider,
 );

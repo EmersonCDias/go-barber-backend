@@ -4,16 +4,21 @@ import StorageProviderMOCK from '@shared/container/providers/StorageProvider/moc
 import UsersRepositoryMOCK from '../repositories/mocks/UsersRepositoryMOCK';
 import UpdateUserAvatarService from './UpdateUserAvatarService';
 
-describe('UpdateUserAvatarService', () => {
-  it('should be able to upload an image', async () => {
-    const usersRepositoryMOCK = new UsersRepositoryMOCK();
-    const storageProviderMOCK = new StorageProviderMOCK();
+let usersRepositoryMOCK: UsersRepositoryMOCK;
+let storageProviderMOCK: StorageProviderMOCK;
+let updateUserAvatar: UpdateUserAvatarService;
 
-    const updateUserAvatar = new UpdateUserAvatarService(
+describe('UpdateUserAvatarService', () => {
+  beforeEach(() => {
+    usersRepositoryMOCK = new UsersRepositoryMOCK();
+    storageProviderMOCK = new StorageProviderMOCK();
+    updateUserAvatar = new UpdateUserAvatarService(
       usersRepositoryMOCK,
       storageProviderMOCK,
     );
+  })
 
+  it('should be able to upload an image', async () => {
     const user = await usersRepositoryMOCK.createAndSaveUser({
       name: 'John Doe',
       email: 'johndoe@email.com',
@@ -29,14 +34,6 @@ describe('UpdateUserAvatarService', () => {
   });
 
   it('should not be able to update avatar if there is no user', async () => {
-    const usersRepositoryMOCK = new UsersRepositoryMOCK();
-    const storageProviderMOCK = new StorageProviderMOCK();
-
-    const updateUserAvatar = new UpdateUserAvatarService(
-      usersRepositoryMOCK,
-      storageProviderMOCK,
-    );
-
     await expect(
       updateUserAvatar.run({
         user_id: 'non-existing-user',
@@ -46,15 +43,7 @@ describe('UpdateUserAvatarService', () => {
   });
 
   it('should be able to delete an image if user already has one', async () => {
-    const usersRepositoryMOCK = new UsersRepositoryMOCK();
-    const storageProviderMOCK = new StorageProviderMOCK();
-
     const deleteFile = jest.spyOn(storageProviderMOCK, 'deleteFile');
-
-    const updateUserAvatar = new UpdateUserAvatarService(
-      usersRepositoryMOCK,
-      storageProviderMOCK,
-    );
 
     const user = await usersRepositoryMOCK.createAndSaveUser({
       name: 'John Doe',

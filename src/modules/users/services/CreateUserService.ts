@@ -18,16 +18,14 @@ class CreateUserService {
     @inject('UsersRepository')
     private usersRepository: IUsersRepository,
 
-    @inject('BCriptyHashProvider')
+    @inject('HashProvider')
     private hashProvider: IHashProvider,
   ) { }
 
   public async run({ name, email, password }: IRequest): Promise<User> {
     const checkUserExists = await this.usersRepository.findUserByEmail(email);
 
-    if (checkUserExists) {
-      throw new AppError('E-mail address already exists');
-    }
+    if (checkUserExists) throw new AppError('E-mail address already exists');
 
     const hashedPassword = await this.hashProvider.generateHash(password);
 

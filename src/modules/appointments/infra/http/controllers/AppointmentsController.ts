@@ -19,4 +19,8 @@ export default class AppointmentsController {
 
     return res.json(appointment);
   }
+
+  // public async index(req: Request, res: Response): Promise<Response> {
+
+  // }
 }

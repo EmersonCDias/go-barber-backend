@@ -1,4 +1,4 @@
-import { uuid } from 'uuidv4';
+import { v4 as uuidv4 } from 'uuid';
 
 import IUserTokensRepository from '@modules/users/repositories/IUserTokensRepository';
 
@@ -11,8 +11,8 @@ export default class UserTokensRepositoryMOCK implements IUserTokensRepository {
     const userToken = new UserTokens();
 
     Object.assign(userToken, {
-      id: uuid(),
-      token: uuid(),
+      id: uuidv4(),
+      token: uuidv4(),
       user_id,
       created_at: new Date(),
       updated_at: new Date(),
