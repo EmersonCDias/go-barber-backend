@@ -103,4 +103,12 @@ describe('UpdateUserAvatarService', () => {
       password: '1234mudar',
     })).rejects.toBeInstanceOf(AppError);
   });
+
+  it('should not be able to update the user if it does not exist', () => {
+    expect(updateProfileService.run({
+      user_id: 'nonexistent-user-id',
+      name: 'Nonexistent user',
+      email: 'nonexistent@email.com'
+    })).rejects.toBeInstanceOf(AppError);
+  });
 });
