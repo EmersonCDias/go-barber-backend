@@ -1,0 +1,39 @@
+import { Request, Response } from 'express';
+import { container } from 'tsyringe';
+
+import UpdateProfileService from '@modules/users/services/UpdateProfileService';
+import ShowProfileService from '@modules/users/services/ShowProfileService';
+
+export default class UsersController {
+  public async show(req: Request, res: Response): Promise<Response> {
+    const user_id = req.user.id;
+
+    const showUserProfile = await container.resolve(ShowProfileService);
+
+    const { name, email } = await showUserProfile.run(user_id);
+
+    return res.status(200).json({
+      name,
+      email,
+    });
+  }
+
+  public async update(req: Request, res: Response): Promise<Response> {
+    const user_id = req.user.id;
+    const { name, email, password, old_password } = req.body;
+
+    const updateUser = await container.resolve(UpdateProfileService);
+
+    const user = await updateUser.run({
+      user_id,
+      email,
+      name,
+      old_password,
+      password,
+    })
+
+    delete user.password;
+
+    return res.status(200).json(user);
+  }
+}
