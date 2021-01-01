@@ -9,10 +9,8 @@ let showProfileService: ShowProfileService;
 describe('ShowProfileService', () => {
   beforeEach(() => {
     usersRepositoryMOCK = new UsersRepositoryMOCK();
-    showProfileService = new ShowProfileService(
-      usersRepositoryMOCK
-    );
-  })
+    showProfileService = new ShowProfileService(usersRepositoryMOCK);
+  });
 
   it('should be able to return the user info', async () => {
     const { id } = await usersRepositoryMOCK.createAndSaveUser({
@@ -28,6 +26,8 @@ describe('ShowProfileService', () => {
   });
 
   it('should not be able to return the user info if it does not exist', () => {
-    expect(showProfileService.run('nonexistent-user-id')).rejects.toBeInstanceOf(AppError);
+    expect(
+      showProfileService.run('nonexistent-user-id'),
+    ).rejects.toBeInstanceOf(AppError);
   });
 });

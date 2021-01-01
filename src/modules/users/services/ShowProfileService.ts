@@ -10,7 +10,7 @@ export default class ShowProfileService {
   constructor(
     @inject('UsersRepository')
     private usersRepository: IUsersRepository,
-  ) { }
+  ) {}
 
   public async run(user_id: string): Promise<User> {
     const user = await this.usersRepository.findUserById(user_id);

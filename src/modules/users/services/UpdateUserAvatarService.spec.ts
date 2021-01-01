@@ -16,7 +16,7 @@ describe('UpdateUserAvatarService', () => {
       usersRepositoryMOCK,
       storageProviderMOCK,
     );
-  })
+  });
 
   it('should be able to upload an image', async () => {
     const user = await usersRepositoryMOCK.createAndSaveUser({

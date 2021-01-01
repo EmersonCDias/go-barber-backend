@@ -16,8 +16,7 @@ describe('CreateUserService', () => {
       usersRepositoryMOCK,
       hashProviderMOCK,
     );
-
-  })
+  });
 
   it('should be able to create a new user', async () => {
     const user = await createUserService.run({

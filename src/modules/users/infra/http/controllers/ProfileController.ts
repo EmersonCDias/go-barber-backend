@@ -30,7 +30,7 @@ export default class UsersController {
       name,
       old_password,
       password,
-    })
+    });
 
     delete user.password;
 

@@ -2,10 +2,11 @@ import { v4 as uuidv4 } from 'uuid';
 
 import IUsersRepository from '@modules/users/repositories/IUsersRepository';
 import ICreateUserDTO from '@modules/users/dtos/ICreateUserDTO';
+import IFindAllProvidersDTO from '@modules/users/dtos/IFindAllProvidersDTO';
 
 import User from '../../infra/typeorm/entities/User';
 
-class UsersRepositoryMOCK implements IUsersRepository {
+export default class UsersRepositoryMOCK implements IUsersRepository {
   private users: User[] = [];
 
   public async createAndSaveUser(userData: ICreateUserDTO): Promise<User> {
@@ -18,16 +19,28 @@ class UsersRepositoryMOCK implements IUsersRepository {
     return user;
   }
 
-  public async findUserById(id: string): Promise<User | undefined> {
-    const findId = this.users.find(item => item.id === id);
+  public async findAllProviders({
+    except_user_id,
+  }: IFindAllProvidersDTO): Promise<User[]> {
+    let { users } = this;
 
-    return findId;
+    if (except_user_id) {
+      users = this.users.filter(item => item.id !== except_user_id);
+    }
+
+    return users;
   }
 
   public async findUserByEmail(email: string): Promise<User | undefined> {
     const findEmail = this.users.find(item => item.email === email);
 
     return findEmail;
+  }
+
+  public async findUserById(id: string): Promise<User | undefined> {
+    const findId = this.users.find(item => item.id === id);
+
+    return findId;
   }
 
   public async saveUser(user: User): Promise<User> {
@@ -38,5 +51,3 @@ class UsersRepositoryMOCK implements IUsersRepository {
     return user;
   }
 }
-
-export default UsersRepositoryMOCK;

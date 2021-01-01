@@ -16,7 +16,7 @@ describe('UpdateUserAvatarService', () => {
       usersRepositoryMOCK,
       hashProviderMOCK,
     );
-  })
+  });
 
   it('should be able to update profile', async () => {
     const user = await usersRepositoryMOCK.createAndSaveUser({
@@ -29,7 +29,7 @@ describe('UpdateUserAvatarService', () => {
       user_id: user.id,
       name: 'John Test',
       email: 'johntest@gmail.com',
-    })
+    });
 
     expect(updatedUser.name).toBe('John Test');
     expect(updatedUser.email).toBe('johntest@gmail.com');
@@ -48,11 +48,13 @@ describe('UpdateUserAvatarService', () => {
       password: '123mudar',
     });
 
-    await expect(updateProfileService.run({
-      user_id: user.id,
-      name: 'John Test',
-      email: 'johndoe1@gmail.com',
-    })).rejects.toBeInstanceOf(AppError);
+    await expect(
+      updateProfileService.run({
+        user_id: user.id,
+        name: 'John Test',
+        email: 'johndoe1@gmail.com',
+      }),
+    ).rejects.toBeInstanceOf(AppError);
   });
 
   it('should be able to update the password', async () => {
@@ -68,7 +70,7 @@ describe('UpdateUserAvatarService', () => {
       email: 'johndoe1@gmail.com',
       old_password: '123mudar',
       password: '1234mudar',
-    })
+    });
 
     expect(updatedPasswordUser.password).toBe('1234mudar');
   });
@@ -80,12 +82,14 @@ describe('UpdateUserAvatarService', () => {
       password: '123mudar',
     });
 
-    await expect(updateProfileService.run({
-      user_id: user.id,
-      name: 'John Test',
-      email: 'johndoe1@gmail.com',
-      password: '1234mudar',
-    })).rejects.toBeInstanceOf(AppError);
+    await expect(
+      updateProfileService.run({
+        user_id: user.id,
+        name: 'John Test',
+        email: 'johndoe1@gmail.com',
+        password: '1234mudar',
+      }),
+    ).rejects.toBeInstanceOf(AppError);
   });
 
   it('should not be able to update the password if the old one is incorrect', async () => {
@@ -95,20 +99,24 @@ describe('UpdateUserAvatarService', () => {
       password: '123mudar',
     });
 
-    await expect(updateProfileService.run({
-      user_id: user.id,
-      name: 'John Test',
-      email: 'johndoe1@gmail.com',
-      old_password: 'wrong-password',
-      password: '1234mudar',
-    })).rejects.toBeInstanceOf(AppError);
+    await expect(
+      updateProfileService.run({
+        user_id: user.id,
+        name: 'John Test',
+        email: 'johndoe1@gmail.com',
+        old_password: 'wrong-password',
+        password: '1234mudar',
+      }),
+    ).rejects.toBeInstanceOf(AppError);
   });
 
   it('should not be able to update the user if it does not exist', () => {
-    expect(updateProfileService.run({
-      user_id: 'nonexistent-user-id',
-      name: 'Nonexistent user',
-      email: 'nonexistent@email.com'
-    })).rejects.toBeInstanceOf(AppError);
+    expect(
+      updateProfileService.run({
+        user_id: 'nonexistent-user-id',
+        name: 'Nonexistent user',
+        email: 'nonexistent@email.com',
+      }),
+    ).rejects.toBeInstanceOf(AppError);
   });
 });

@@ -22,7 +22,7 @@ export default class SendForgotPasswordEmailService {
 
     @inject('UserTokensRepository')
     private userTokensRepository: IUserTokensRepository,
-  ) { }
+  ) {}
 
   public async run({ email }: IRequest): Promise<void> {
     const user = await this.usersRepository.findUserByEmail(email);
@@ -33,7 +33,12 @@ export default class SendForgotPasswordEmailService {
 
     const { token } = await this.userTokensRepository.generate(user.id);
 
-    const forgotPasswordTemplate = path.resolve(__dirname, '..', 'views', 'forgot_password.hbs');
+    const forgotPasswordTemplate = path.resolve(
+      __dirname,
+      '..',
+      'views',
+      'forgot_password.hbs',
+    );
 
     await this.mailProvider.sendMail({
       to: {
@@ -46,8 +51,8 @@ export default class SendForgotPasswordEmailService {
         variables: {
           name: user.name,
           link: `http://localhost:3000/reset_password?token=${token}`,
-        }
-      }
+        },
+      },
     });
   }
 }

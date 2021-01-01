@@ -16,7 +16,7 @@ class CreateAppointmentService {
   constructor(
     @inject('AppointmentsRepository')
     private appointmentsRepository: IAppointmentsRepository,
-  ) { }
+  ) {}
 
   public async run({ provider_id, date }: IRequest): Promise<Appointment> {
     const appointmentDate = startOfHour(date);

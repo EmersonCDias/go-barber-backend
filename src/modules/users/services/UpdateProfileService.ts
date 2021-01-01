@@ -22,9 +22,15 @@ export default class UpdateProfileService {
 
     @inject('HashProvider')
     private hashProvider: IHashProvider,
-  ) { }
+  ) {}
 
-  public async run({ user_id, name, email, password, old_password }: IRequest): Promise<User> {
+  public async run({
+    user_id,
+    name,
+    email,
+    password,
+    old_password,
+  }: IRequest): Promise<User> {
     const user = await this.usersRepository.findUserById(user_id);
 
     if (!user) throw new AppError('User not found');
@@ -38,10 +44,14 @@ export default class UpdateProfileService {
     user.name = name;
     user.email = email;
 
-    if (password && !old_password) throw new AppError('Old password not informed');
+    if (password && !old_password)
+      throw new AppError('Old password not informed');
 
     if (password && old_password) {
-      const checkOldPassword = await this.hashProvider.compareHash(old_password, user.password);
+      const checkOldPassword = await this.hashProvider.compareHash(
+        old_password,
+        user.password,
+      );
 
       if (!checkOldPassword) throw new AppError('Old password does not match');
 

@@ -3,7 +3,6 @@ import { differenceInHours } from 'date-fns';
 
 import AppError from '@shared/errors/AppErrors';
 
-// import User from '../infra/typeorm/entities/User';
 import IUsersRepository from '../repositories/IUsersRepository';
 import IUserTokensRepository from '../repositories/IUserTokensRepository';
 import IHashProvider from '../providers/HashProvider/models/IHashProvider';
@@ -24,7 +23,7 @@ export default class SendForgotPasswordEmailService {
 
     @inject('HashProvider')
     private hashProvider: IHashProvider,
-  ) { }
+  ) {}
 
   public async run({ password, token }: IRequest): Promise<void> {
     const userToken = await this.userTokensRepository.findUserByToken(token);

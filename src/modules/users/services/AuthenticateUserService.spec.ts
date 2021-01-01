@@ -22,7 +22,7 @@ describe('AuthenticateUserService', () => {
       usersRepositoryMOCK,
       hashProviderMOCK,
     );
-  })
+  });
 
   it('should be able to authenticate', async () => {
     const user = await createUserService.run({
@@ -41,7 +41,6 @@ describe('AuthenticateUserService', () => {
   });
 
   it('should not be able to authenticate if user does not exists', async () => {
-
     expect(
       authenticateUserService.run({
         email: 'johndoe1@email.com',

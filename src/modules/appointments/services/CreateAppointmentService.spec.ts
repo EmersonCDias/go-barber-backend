@@ -12,7 +12,7 @@ describe('CreateAppointmentService', () => {
     createAppointmentService = new CreateAppointmentService(
       appointmentsRepositoryMOCK,
     );
-  })
+  });
 
   it('should be able to create a new appointment', async () => {
     const appointment = await createAppointmentService.run({
