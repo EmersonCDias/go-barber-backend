@@ -38,13 +38,13 @@ export default class ListProviderMonthAvailabilityService {
     );
 
     const availableDays = eachDayArray.map(day => {
-      const appointmentsFoundInDay = appointments.filter(appointment => {
+      const appointmentsFoundByDay = appointments.filter(appointment => {
         return getDate(appointment.date) === day;
       });
 
       return {
         day,
-        available: appointmentsFoundInDay.length < 10,
+        available: appointmentsFoundByDay.length < 10,
       };
     });
 
