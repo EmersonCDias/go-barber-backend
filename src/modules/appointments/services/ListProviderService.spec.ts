@@ -1,13 +1,13 @@
 import UsersRepositoryMOCK from '@modules/users/repositories/mocks/UsersRepositoryMOCK';
-import ListProviderService from './ListProviderService';
+import ListProvidersService from './ListProvidersService';
 
 let usersRepositoryMOCK: UsersRepositoryMOCK;
-let listProviderService: ListProviderService;
+let listProviderService: ListProvidersService;
 
-describe('ListProviderService', () => {
+describe('ListProvidersService', () => {
   beforeEach(() => {
     usersRepositoryMOCK = new UsersRepositoryMOCK();
-    listProviderService = new ListProviderService(usersRepositoryMOCK);
+    listProviderService = new ListProvidersService(usersRepositoryMOCK);
   });
 
   it('should be able to list the providers', async () => {
