@@ -44,15 +44,15 @@ describe('CreateAppointmentService', () => {
 
     await createAppointmentService.run({
       date,
-      user_id: 'user1',
-      provider_id: 'user2',
+      user_id: 'user_id',
+      provider_id: 'provider_id',
     });
 
     await expect(
       createAppointmentService.run({
         date,
-        user_id: 'user1',
-        provider_id: 'user2',
+        user_id: 'user_id',
+        provider_id: 'provider_id',
       }),
     ).rejects.toBeInstanceOf(AppError);
   });
@@ -65,8 +65,8 @@ describe('CreateAppointmentService', () => {
     await expect(
       createAppointmentService.run({
         date: new Date(2020, 4, 10, 11),
-        user_id: 'user1',
-        provider_id: 'user2',
+        user_id: 'user_id',
+        provider_id: 'provider_id',
       }),
     ).rejects.toBeInstanceOf(AppError);
   });
@@ -81,6 +81,28 @@ describe('CreateAppointmentService', () => {
         date: new Date(2020, 4, 10, 13),
         user_id: 'user1',
         provider_id: 'user1',
+      }),
+    ).rejects.toBeInstanceOf(AppError);
+  });
+
+  it('should not be able to make an appointment before 8h and after 17h', async () => {
+    jest.spyOn(Date, 'now').mockImplementationOnce(() => {
+      return new Date(2020, 4, 10, 6).getTime();
+    });
+
+    await expect(
+      createAppointmentService.run({
+        date: new Date(2020, 4, 10, 7),
+        user_id: 'user_id',
+        provider_id: 'provider_id',
+      }),
+    ).rejects.toBeInstanceOf(AppError);
+
+    await expect(
+      createAppointmentService.run({
+        date: new Date(2020, 4, 10, 18),
+        user_id: 'user_id',
+        provider_id: 'provider_id',
       }),
     ).rejects.toBeInstanceOf(AppError);
   });
