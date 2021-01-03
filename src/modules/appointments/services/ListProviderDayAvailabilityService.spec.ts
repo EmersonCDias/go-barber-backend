@@ -4,7 +4,7 @@ import ListProviderDayAvailabilityService from './ListProviderDayAvailabilitySer
 let appointmentsRepositoryMOCK: AppointmentsRepositoryMOCK;
 let listProviderDayAvailabilityService: ListProviderDayAvailabilityService;
 
-describe('ListProviderDayAvailabilityService.spec', () => {
+describe('ListProviderDayAvailabilityService', () => {
   beforeEach(() => {
     appointmentsRepositoryMOCK = new AppointmentsRepositoryMOCK();
     listProviderDayAvailabilityService = new ListProviderDayAvailabilityService(
