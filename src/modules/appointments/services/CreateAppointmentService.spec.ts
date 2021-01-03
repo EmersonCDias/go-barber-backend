@@ -1,16 +1,21 @@
 import AppError from '@shared/errors/AppErrors';
 
+import NotificationsRepositoryMOCK from '@modules/notifications/repositories/mock/NotificationRepositoryMOCK';
+
 import AppointmentsRepositoryMOCK from '../repositories/mocks/AppointmentsRepositoryMOCK';
 import CreateAppointmentService from './CreateAppointmentService';
 
+let notificationsRepositoryMOCK: NotificationsRepositoryMOCK;
 let appointmentsRepositoryMOCK: AppointmentsRepositoryMOCK;
 let createAppointmentService: CreateAppointmentService;
 
 describe('CreateAppointmentService', () => {
   beforeEach(() => {
+    notificationsRepositoryMOCK = new NotificationsRepositoryMOCK();
     appointmentsRepositoryMOCK = new AppointmentsRepositoryMOCK();
     createAppointmentService = new CreateAppointmentService(
       appointmentsRepositoryMOCK,
+      notificationsRepositoryMOCK,
     );
   });
 
@@ -35,7 +40,7 @@ describe('CreateAppointmentService', () => {
     expect(appointment.provider_id).toBe('user2');
   });
 
-  it('should not be able to create two or more appointments on the same time', async () => {
+  it('should not be able to create two or more appointments on the same date', async () => {
     jest.spyOn(Date, 'now').mockImplementationOnce(() => {
       return new Date(2020, 4, 10, 12).getTime();
     });
@@ -57,7 +62,7 @@ describe('CreateAppointmentService', () => {
     ).rejects.toBeInstanceOf(AppError);
   });
 
-  it('should not be able to create an aapointment on a past date', async () => {
+  it('should not be able to create an appointment on a past date', async () => {
     jest.spyOn(Date, 'now').mockImplementationOnce(() => {
       return new Date(2020, 4, 10, 12).getTime();
     });
