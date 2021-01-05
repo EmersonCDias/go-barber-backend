@@ -3,7 +3,6 @@ import { parseISO } from 'date-fns';
 import { container } from 'tsyringe';
 
 import CreateAppointmentService from '@modules/appointments/services/CreateAppointmentService';
-import ListProviderAppointmentsService from '@modules/appointments/services/ListProviderAppointmentsService';
 
 export default class AppointmentsController {
   public async create(req: Request, res: Response): Promise<Response> {

@@ -1,6 +1,5 @@
 import AppointmentsRepositoryMOCK from '../repositories/mocks/AppointmentsRepositoryMOCK';
 import ListProviderMonthAvailabilityService from './ListProviderMonthAvailabilityService';
-import arrayContaining = jasmine.arrayContaining;
 
 let appointmentsRepositoryMOCK: AppointmentsRepositoryMOCK;
 let listProviderMonthAvailabilityService: ListProviderMonthAvailabilityService;
