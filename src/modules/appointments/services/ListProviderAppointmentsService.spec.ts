@@ -1,14 +1,19 @@
+import CacheProviderMOCK from '@shared/container/providers/CacheProvider/mocks/CacheProviderMOCK';
+
 import AppointmentsRepositoryMOCK from '../repositories/mocks/AppointmentsRepositoryMOCK';
 import ListProviderAppointmentsService from './ListProviderAppointmentsService';
 
+let cacheProviderMOCK: CacheProviderMOCK;
 let appointmentsRepositoryMOCK: AppointmentsRepositoryMOCK;
 let listProviderAppointmentsService: ListProviderAppointmentsService;
 
 describe('ListProviderAppointmentsService', () => {
   beforeEach(() => {
+    cacheProviderMOCK = new CacheProviderMOCK();
     appointmentsRepositoryMOCK = new AppointmentsRepositoryMOCK();
     listProviderAppointmentsService = new ListProviderAppointmentsService(
       appointmentsRepositoryMOCK,
+      cacheProviderMOCK,
     );
   });
 

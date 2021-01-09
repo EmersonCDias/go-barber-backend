@@ -1,20 +1,24 @@
 import AppError from '@shared/errors/AppErrors';
+import CacheProviderMOCK from '@shared/container/providers/CacheProvider/mocks/CacheProviderMOCK';
 
 import UsersRepositoryMOCK from '../repositories/mocks/UsersRepositoryMOCK';
 import HashProviderMOCK from '../providers/HashProvider/mocks/HashProviderMOCK';
 import CreateUserService from './CreateUserService';
 
+let cacheProviderMOCK: CacheProviderMOCK;
 let usersRepositoryMOCK: UsersRepositoryMOCK;
 let hashProviderMOCK: HashProviderMOCK;
 let createUserService: CreateUserService;
 
 describe('CreateUserService', () => {
   beforeEach(() => {
+    cacheProviderMOCK = new CacheProviderMOCK();
     usersRepositoryMOCK = new UsersRepositoryMOCK();
     hashProviderMOCK = new HashProviderMOCK();
     createUserService = new CreateUserService(
       usersRepositoryMOCK,
       hashProviderMOCK,
+      cacheProviderMOCK,
     );
   });
 

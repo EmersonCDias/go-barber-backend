@@ -17,3 +17,6 @@ export default {
     },
   },
 } as ICacheConfig;
+
+// DATADOG - monitora quantas vezes uma chamada está sendo feita no banco para
+// identificar se vale a pena cachear ou nao

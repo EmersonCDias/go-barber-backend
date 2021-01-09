@@ -1,21 +1,25 @@
 import AppError from '@shared/errors/AppErrors';
 
 import NotificationsRepositoryMOCK from '@modules/notifications/repositories/mock/NotificationRepositoryMOCK';
+import CacheProviderMOCK from '@shared/container/providers/CacheProvider/mocks/CacheProviderMOCK';
 
 import AppointmentsRepositoryMOCK from '../repositories/mocks/AppointmentsRepositoryMOCK';
 import CreateAppointmentService from './CreateAppointmentService';
 
+let cacheProviderMOCK: CacheProviderMOCK;
 let notificationsRepositoryMOCK: NotificationsRepositoryMOCK;
 let appointmentsRepositoryMOCK: AppointmentsRepositoryMOCK;
 let createAppointmentService: CreateAppointmentService;
 
 describe('CreateAppointmentService', () => {
   beforeEach(() => {
+    cacheProviderMOCK = new CacheProviderMOCK();
     notificationsRepositoryMOCK = new NotificationsRepositoryMOCK();
     appointmentsRepositoryMOCK = new AppointmentsRepositoryMOCK();
     createAppointmentService = new CreateAppointmentService(
       appointmentsRepositoryMOCK,
       notificationsRepositoryMOCK,
+      cacheProviderMOCK,
     );
   });
 
