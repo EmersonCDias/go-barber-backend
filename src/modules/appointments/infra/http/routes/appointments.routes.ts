@@ -12,15 +12,6 @@ const providerAppointmentsController = new ProviderAppointmentsController();
 
 appointmentsRouter.use(ensureAuthenticated);
 
-appointmentsRouter.get(
-  '/schedule/:provider_id',
-  celebrate({
-    [Segments.PARAMS]: {
-      provider_id: Joi.string().uuid().required(),
-    },
-  }),
-  providerAppointmentsController.index,
-);
 appointmentsRouter.post(
   '/',
   celebrate({
@@ -31,5 +22,6 @@ appointmentsRouter.post(
   }),
   appointmentController.create,
 );
+appointmentsRouter.get('/me', providerAppointmentsController.index);
 
 export default appointmentsRouter;
