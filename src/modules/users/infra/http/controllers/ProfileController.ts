@@ -30,6 +30,6 @@ export default class UsersController {
       password,
     });
 
-    return res.status(200).json(user);
+    return res.status(200).json(classToClass(user));
   }
 }
