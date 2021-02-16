@@ -1,0 +1,31 @@
+[
+  {
+    "name": "",
+    "type": "",
+    "host": "",
+    "port": 0,
+    "username": "",
+    "password": "",
+    "database": "",
+    "entities": [
+      "src/modules/**/infra/typeorm/entities/*.ts"
+    ],
+    "migrations": [
+      "src/shared/infra/typeorm/migrations/*.ts"
+    ],
+    "cli": {
+      "migrationsDir": ""
+    }
+  },
+  {
+    "name": "",
+    "type": "",
+    "host": "",
+    "port": 0,
+    "database": "",
+    "useUnifiedTopology": true,
+    "entities": [
+      ""
+    ]
+  }
+]
