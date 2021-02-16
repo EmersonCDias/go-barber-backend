@@ -1,0 +1,67 @@
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _uuid = require("uuid");
+
+var _dateFns = require("date-fns");
+
+var _Appointment = _interopRequireDefault(require("../../infra/typeorm/entities/Appointment"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+class AppointmentsRepositoryMOCK {
+  constructor() {
+    this.appointments = [];
+  }
+
+  async createAndSave({
+    provider_id,
+    user_id,
+    date
+  }) {
+    const appointment = new _Appointment.default();
+    Object.assign(appointment, {
+      id: (0, _uuid.v4)(),
+      date,
+      provider_id,
+      user_id
+    });
+    this.appointments.push(appointment);
+    return appointment;
+  }
+
+  async findAllInDayFromProvider({
+    provider_id,
+    day,
+    month,
+    year
+  }) {
+    const appointments = this.appointments.filter(item => item.provider_id === provider_id && (0, _dateFns.getDate)(item.date) === day && (0, _dateFns.getMonth)(item.date) + 1 === month && (0, _dateFns.getYear)(item.date) === year);
+    return appointments;
+  }
+
+  async findAllInMonthFromProvider({
+    provider_id,
+    month,
+    year
+  }) {
+    const appointments = this.appointments.filter(item => item.provider_id === provider_id && (0, _dateFns.getMonth)(item.date) + 1 === month && (0, _dateFns.getYear)(item.date) === year);
+    return appointments;
+  }
+
+  async findByDate({
+    date,
+    provider_id
+  }) {
+    const findAppointment = this.appointments.find(appointment => (0, _dateFns.isEqual)(appointment.date, date) && appointment.provider_id === provider_id);
+    return findAppointment;
+  }
+
+}
+
+var _default = AppointmentsRepositoryMOCK;
+exports.default = _default;
