@@ -31,8 +31,8 @@ jobs:
           username: ${{ secrets.USER }}
           key: ${{ secrets.KEY }}
           port: ${{ secrets.PORT }}
-          source: "dist"
-          target: "test"
+          source: "."
+          target: "~/go-barber-backend"
       
       # Copiar a pasta dist pra dentro da Digital Ocean
       # Substituir o código existente na pasta "dist" pelo novo código
