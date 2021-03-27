@@ -15,6 +15,8 @@ export default function ensureAuthenticated(
   res: Response,
   next: NextFunction,
 ): void {
+  res.header('Access-Control-Allow-Origin', 'https://gobarber-backend.xyz/');
+
   const authHeader = req.headers.authorization;
 
   if (!authHeader) {
