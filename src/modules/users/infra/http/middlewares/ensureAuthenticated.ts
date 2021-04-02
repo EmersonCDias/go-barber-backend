@@ -15,14 +15,6 @@ export default function ensureAuthenticated(
   res: Response,
   next: NextFunction,
 ): void {
-  res.header({
-    'Access-Control-Allow-Origin': 'https://go-barber-emerson-dias.netlify.app',
-    'Access-Control-Allow-Credentials': 'true',
-    'Access-Control-Allow-Headers':
-      'Authorization,Accept,Origin,DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Content-Range,Range',
-    'Access-Control-Allow-Methods': 'GET,POST,OPTIONS,PUT,DELETE,PATCH',
-  });
-
   const authHeader = req.headers.authorization;
 
   if (!authHeader) {

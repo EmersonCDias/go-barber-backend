@@ -17,6 +17,12 @@ import '@shared/container';
 
 const app = express();
 
+app.use(function (req: Request, res: Response, next: NextFunction) {
+  res.set('access-control-allow-origin', '*');
+  res.set('access-control-allow-methods', '*');
+  res.set('access-control-allow-headers', '*');
+  next();
+});
 app.use(cors());
 app.use(express.json());
 app.use('/files', express.static(uploadConfig.uploadsFolder));
