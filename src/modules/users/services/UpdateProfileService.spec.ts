@@ -1,4 +1,4 @@
-import AppError from '@shared/errors/AppErrors';
+import AppErrors from '../../../shared/errors/AppErrors';
 
 import HashProviderMOCK from '../providers/HashProvider/mocks/HashProviderMOCK';
 import UsersRepositoryMOCK from '../repositories/mocks/UsersRepositoryMOCK';
@@ -54,7 +54,7 @@ describe('UpdateUserAvatarService', () => {
         name: 'John Test',
         email: 'johndoe1@gmail.com',
       }),
-    ).rejects.toBeInstanceOf(AppError);
+    ).rejects.toBeInstanceOf(AppErrors);
   });
 
   it('should be able to update the password', async () => {
@@ -89,7 +89,7 @@ describe('UpdateUserAvatarService', () => {
         email: 'johndoe1@gmail.com',
         password: '1234mudar',
       }),
-    ).rejects.toBeInstanceOf(AppError);
+    ).rejects.toBeInstanceOf(AppErrors);
   });
 
   it('should not be able to update the password if the old one is incorrect', async () => {
@@ -107,7 +107,7 @@ describe('UpdateUserAvatarService', () => {
         old_password: 'wrong-password',
         password: '1234mudar',
       }),
-    ).rejects.toBeInstanceOf(AppError);
+    ).rejects.toBeInstanceOf(AppErrors);
   });
 
   it('should not be able to update the user if it does not exist', () => {
@@ -117,6 +117,6 @@ describe('UpdateUserAvatarService', () => {
         name: 'Nonexistent user',
         email: 'nonexistent@email.com',
       }),
-    ).rejects.toBeInstanceOf(AppError);
+    ).rejects.toBeInstanceOf(AppErrors);
   });
 });

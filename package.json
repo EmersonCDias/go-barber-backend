@@ -7,9 +7,7 @@
     "node": "12.13.1"
   },
   "scripts": {
-    "build": "babel src --extensions \".js,.ts\" --out-dir dist --copy-files",
-    "postinstall": "npm run tsc",
-    "tsc": "tsc",
+    "build": "tsc",
     "dev:server": "ts-node-dev -r tsconfig-paths/register --inspect --transpile-only --ignore-watch node_modules src/shared/infra/http/server.ts",
     "start": "ts-node dist/shared/infra/http/server.js",
     "typeorm": "ts-node-dev -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
@@ -79,6 +77,7 @@
     "ts-jest": "^26.4.1",
     "ts-node-dev": "^1.0.0-pre.56",
     "tsconfig-paths": "^3.9.0",
+    "tscpaths": "^0.0.9",
     "typescript": "^3.9.7"
   }
 }

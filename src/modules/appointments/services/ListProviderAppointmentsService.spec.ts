@@ -1,4 +1,4 @@
-import CacheProviderMOCK from '@shared/container/providers/CacheProvider/mocks/CacheProviderMOCK';
+import CacheProviderMOCK from '../../../shared/container/providers/CacheProvider/mocks/CacheProviderMOCK';
 
 import AppointmentsRepositoryMOCK from '../repositories/mocks/AppointmentsRepositoryMOCK';
 import ListProviderAppointmentsService from './ListProviderAppointmentsService';

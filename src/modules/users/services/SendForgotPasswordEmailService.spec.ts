@@ -1,6 +1,5 @@
-import AppError from '@shared/errors/AppErrors';
-
-import MailProviderMOCK from '@shared/container/providers/MailProvider/mocks/MailProviderMOCK';
+import AppErrors from '../../../shared/errors/AppErrors';
+import MailProviderMOCK from '../../../shared/container/providers/MailProvider/mocks/MailProviderMOCK';
 
 import UsersRepositoryMOCK from '../repositories/mocks/UsersRepositoryMOCK';
 import SendForgotPasswordEmailService from './SendForgotPasswordEmailService';
@@ -44,7 +43,7 @@ describe('SendForgotPasswordEmailService', () => {
       sendForgotPasswordEmailService.run({
         email: 'johndoe@email.com',
       }),
-    ).rejects.toBeInstanceOf(AppError);
+    ).rejects.toBeInstanceOf(AppErrors);
   });
 
   it('should generate a forgot password token', async () => {

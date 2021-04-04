@@ -1,6 +1,6 @@
 import Redis, { Redis as RedisType } from 'ioredis';
 
-import cacheConfig from '@config/cache';
+import cacheConfig from '../../../../../config/cache';
 
 import ICacheProvider from '../models/ICacheProvider';
 

@@ -1,7 +1,7 @@
 import { injectable, inject } from 'tsyringe';
 import { classToClass } from 'class-transformer';
 
-import ICacheProvider from '@shared/container/providers/CacheProvider/models/ICacheProvider';
+import ICacheProvider from '../../../shared/container/providers/CacheProvider/models/ICacheProvider';
 
 import Appointment from '../infra/typeorm/entities/Appointment';
 import IAppointmentsRepository from '../repositories/IAppointmentsRepository';

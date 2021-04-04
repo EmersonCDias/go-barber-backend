@@ -6,23 +6,17 @@ import 'express-async-errors';
 import cors from 'cors';
 import { errors } from 'celebrate';
 
-import uploadConfig from '@config/upload';
-import AppError from '@shared/errors/AppErrors';
+import uploadConfig from '../../../config/upload';
+import AppErrors from '../../errors/AppErrors';
 
 import rateLimiter from './middlewares/rateLimiter';
 import routes from './routes';
 
-import '@shared/infra/typeorm';
-import '@shared/container';
+import '../typeorm';
+import '../../container';
 
 const app = express();
 
-app.use(function (req: Request, res: Response, next: NextFunction) {
-  res.set('access-control-allow-origin', '*');
-  res.set('access-control-allow-methods', '*');
-  res.set('access-control-allow-headers', '*');
-  next();
-});
 app.use(cors());
 app.use(express.json());
 app.use('/files', express.static(uploadConfig.uploadsFolder));
@@ -31,7 +25,7 @@ app.use(routes);
 app.use(errors());
 
 app.use((err: Error, req: Request, res: Response, _: NextFunction) => {
-  if (err instanceof AppError) {
+  if (err instanceof AppErrors) {
     return res.status(err.statusCode).json({
       status: 'error',
       msg: err.msg,

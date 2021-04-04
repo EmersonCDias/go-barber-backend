@@ -1,4 +1,4 @@
-import AppError from '@shared/errors/AppErrors';
+import AppErrors from '../../../shared/errors/AppErrors';
 
 import UsersRepositoryMOCK from '../repositories/mocks/UsersRepositoryMOCK';
 import ShowProfileService from './ShowProfileService';
@@ -28,6 +28,6 @@ describe('ShowProfileService', () => {
   it('should not be able to return the user info if it does not exist', () => {
     expect(
       showProfileService.run('nonexistent-user-id'),
-    ).rejects.toBeInstanceOf(AppError);
+    ).rejects.toBeInstanceOf(AppErrors);
   });
 });

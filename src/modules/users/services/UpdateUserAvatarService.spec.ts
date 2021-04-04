@@ -1,6 +1,6 @@
-import AppError from '@shared/errors/AppErrors';
+import AppErrors from '../../../shared/errors/AppErrors';
+import StorageProviderMOCK from '../../../shared/container/providers/StorageProvider/mocks/StorageProviderMOCK';
 
-import StorageProviderMOCK from '@shared/container/providers/StorageProvider/mocks/StorageProviderMOCK';
 import UsersRepositoryMOCK from '../repositories/mocks/UsersRepositoryMOCK';
 import UpdateUserAvatarService from './UpdateUserAvatarService';
 
@@ -39,7 +39,7 @@ describe('UpdateUserAvatarService', () => {
         user_id: 'non-existing-user',
         avatarFileName: 'avatar.jpg',
       }),
-    ).rejects.toBeInstanceOf(AppError);
+    ).rejects.toBeInstanceOf(AppErrors);
   });
 
   it('should be able to delete an image if user already has one', async () => {

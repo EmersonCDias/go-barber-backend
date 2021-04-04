@@ -1,4 +1,4 @@
-import AppError from '@shared/errors/AppErrors';
+import AppErrors from '../../../shared/errors/AppErrors';
 
 import UsersRepositoryMOCK from '../repositories/mocks/UsersRepositoryMOCK';
 import HashProviderMOCK from '../providers/HashProvider/mocks/HashProviderMOCK';
@@ -40,7 +40,7 @@ describe('AuthenticateUserService', () => {
         email: 'johndoe1@email.com',
         password: '123mudar',
       }),
-    ).rejects.toBeInstanceOf(AppError);
+    ).rejects.toBeInstanceOf(AppErrors);
   });
 
   it('should not be able to authenticate if password is incorrect', async () => {
@@ -55,6 +55,6 @@ describe('AuthenticateUserService', () => {
         email: 'johndoe@email.com',
         password: '123muda',
       }),
-    ).rejects.toBeInstanceOf(AppError);
+    ).rejects.toBeInstanceOf(AppErrors);
   });
 });

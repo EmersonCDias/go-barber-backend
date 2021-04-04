@@ -1,8 +1,8 @@
 import { injectable, inject } from 'tsyringe';
 import path from 'path';
 
-import IMailProvider from '@shared/container/providers/MailProvider/mocks/MailProviderMOCK';
-import AppError from '@shared/errors/AppErrors';
+import IMailProvider from '../../../shared/container/providers/MailProvider/models/IMailProvider';
+import AppErrors from '../../../shared/errors/AppErrors';
 
 import IUsersRepository from '../repositories/IUsersRepository';
 import IUserTokensRepository from '../repositories/IUserTokensRepository';
@@ -28,7 +28,7 @@ export default class SendForgotPasswordEmailService {
     const user = await this.usersRepository.findUserByEmail(email);
 
     if (!user) {
-      throw new AppError('User not found');
+      throw new AppErrors('User not found');
     }
 
     const { token } = await this.userTokensRepository.generate(user.id);

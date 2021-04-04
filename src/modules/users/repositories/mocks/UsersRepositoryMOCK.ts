@@ -1,8 +1,8 @@
 import { v4 as uuidv4 } from 'uuid';
 
-import IUsersRepository from '@modules/users/repositories/IUsersRepository';
-import ICreateUserDTO from '@modules/users/dtos/ICreateUserDTO';
-import IFindAllProvidersDTO from '@modules/users/dtos/IFindAllProvidersDTO';
+import IUsersRepository from '../IUsersRepository';
+import ICreateUserDTO from '../../dtos/ICreateUserDTO';
+import IFindAllProvidersDTO from '../../dtos/IFindAllProvidersDTO';
 
 import User from '../../infra/typeorm/entities/User';
 

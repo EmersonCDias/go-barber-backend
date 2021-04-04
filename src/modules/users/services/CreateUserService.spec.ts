@@ -1,5 +1,5 @@
-import AppError from '@shared/errors/AppErrors';
-import CacheProviderMOCK from '@shared/container/providers/CacheProvider/mocks/CacheProviderMOCK';
+import AppErrors from '../../../shared/errors/AppErrors';
+import CacheProviderMOCK from '../../../shared/container/providers/CacheProvider/mocks/CacheProviderMOCK';
 
 import UsersRepositoryMOCK from '../repositories/mocks/UsersRepositoryMOCK';
 import HashProviderMOCK from '../providers/HashProvider/mocks/HashProviderMOCK';
@@ -48,6 +48,6 @@ describe('CreateUserService', () => {
         email: 'johndoe@email.com',
         password: '123mudar',
       }),
-    ).rejects.toBeInstanceOf(AppError);
+    ).rejects.toBeInstanceOf(AppErrors);
   });
 });

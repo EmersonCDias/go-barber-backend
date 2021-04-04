@@ -1,5 +1,5 @@
-import CacheProviderMOCK from '@shared/container/providers/CacheProvider/mocks/CacheProviderMOCK';
-import UsersRepositoryMOCK from '@modules/users/repositories/mocks/UsersRepositoryMOCK';
+import CacheProviderMOCK from '../../../shared/container/providers/CacheProvider/mocks/CacheProviderMOCK';
+import UsersRepositoryMOCK from '../../users/repositories/mocks/UsersRepositoryMOCK';
 
 import ListProvidersService from './ListProvidersService';
 

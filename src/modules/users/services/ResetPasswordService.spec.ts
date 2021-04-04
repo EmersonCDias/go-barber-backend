@@ -1,4 +1,4 @@
-import AppError from '@shared/errors/AppErrors';
+import AppErrors from '../../../shared/errors/AppErrors';
 
 import UsersRepositoryMOCK from '../repositories/mocks/UsersRepositoryMOCK';
 import UserTokensRepositoryMOCK from '../repositories/mocks/UserTokensRepositoryMOCK';
@@ -51,7 +51,7 @@ describe('SendForgotPasswordEmailService', () => {
         password: '1234mudar',
         token: 'non-existing-token',
       }),
-    ).rejects.toBeInstanceOf(AppError);
+    ).rejects.toBeInstanceOf(AppErrors);
   });
 
   it('should not be able to reset the password without a valid user ', async () => {
@@ -64,7 +64,7 @@ describe('SendForgotPasswordEmailService', () => {
         password: '123mudar',
         token,
       }),
-    ).rejects.toBeInstanceOf(AppError);
+    ).rejects.toBeInstanceOf(AppErrors);
   });
 
   it('should not be able to reset the password if token is expired (2h)', async () => {
@@ -87,6 +87,6 @@ describe('SendForgotPasswordEmailService', () => {
         password: '123mudar',
         token,
       }),
-    ).rejects.toBeInstanceOf(AppError);
+    ).rejects.toBeInstanceOf(AppErrors);
   });
 });

@@ -1,7 +1,6 @@
-import AppError from '@shared/errors/AppErrors';
-
-import NotificationsRepositoryMOCK from '@modules/notifications/repositories/mock/NotificationRepositoryMOCK';
-import CacheProviderMOCK from '@shared/container/providers/CacheProvider/mocks/CacheProviderMOCK';
+import AppErrors from '../../../shared/errors/AppErrors';
+import NotificationsRepositoryMOCK from '../../notifications/repositories/mock/NotificationRepositoryMOCK';
+import CacheProviderMOCK from '../../../shared/container/providers/CacheProvider/mocks/CacheProviderMOCK';
 
 import AppointmentsRepositoryMOCK from '../repositories/mocks/AppointmentsRepositoryMOCK';
 import CreateAppointmentService from './CreateAppointmentService';
@@ -63,7 +62,7 @@ describe('CreateAppointmentService', () => {
         user_id: 'user_id',
         provider_id: 'provider_id',
       }),
-    ).rejects.toBeInstanceOf(AppError);
+    ).rejects.toBeInstanceOf(AppErrors);
   });
 
   it('should not be able to create an appointment on a past date', async () => {
@@ -77,7 +76,7 @@ describe('CreateAppointmentService', () => {
         user_id: 'user_id',
         provider_id: 'provider_id',
       }),
-    ).rejects.toBeInstanceOf(AppError);
+    ).rejects.toBeInstanceOf(AppErrors);
   });
 
   it('should not be able to create an appointment with same user as provider', async () => {
@@ -91,7 +90,7 @@ describe('CreateAppointmentService', () => {
         user_id: 'user1',
         provider_id: 'user1',
       }),
-    ).rejects.toBeInstanceOf(AppError);
+    ).rejects.toBeInstanceOf(AppErrors);
   });
 
   it('should not be able to make an appointment before 8h and after 17h', async () => {
@@ -105,7 +104,7 @@ describe('CreateAppointmentService', () => {
         user_id: 'user_id',
         provider_id: 'provider_id',
       }),
-    ).rejects.toBeInstanceOf(AppError);
+    ).rejects.toBeInstanceOf(AppErrors);
 
     await expect(
       createAppointmentService.run({
@@ -113,6 +112,6 @@ describe('CreateAppointmentService', () => {
         user_id: 'user_id',
         provider_id: 'provider_id',
       }),
-    ).rejects.toBeInstanceOf(AppError);
+    ).rejects.toBeInstanceOf(AppErrors);
   });
 });

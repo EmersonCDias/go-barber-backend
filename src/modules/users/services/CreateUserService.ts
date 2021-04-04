@@ -1,7 +1,7 @@
 import { injectable, inject } from 'tsyringe';
 
-import AppError from '@shared/errors/AppErrors';
-import ICacheProvider from '@shared/container/providers/CacheProvider/models/ICacheProvider';
+import ICacheProvider from '../../../shared/container/providers/CacheProvider/models/ICacheProvider';
+import AppErrors from '../../../shared/errors/AppErrors';
 
 import IHashProvider from '../providers/HashProvider/models/IHashProvider';
 import User from '../infra/typeorm/entities/User';
@@ -29,7 +29,7 @@ class CreateUserService {
   public async run({ name, email, password }: IRequest): Promise<User> {
     const checkUserExists = await this.usersRepository.findUserByEmail(email);
 
-    if (checkUserExists) throw new AppError('E-mail address already exists');
+    if (checkUserExists) throw new AppErrors('E-mail address already exists');
 
     const hashedPassword = await this.hashProvider.generateHash(password);
 
