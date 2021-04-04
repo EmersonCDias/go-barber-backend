@@ -7,7 +7,7 @@ interface ICacheConfig {
   };
 }
 
-export default {
+export default ({
   diver: 'redis',
   config: {
     redis: {
@@ -16,7 +16,4 @@ export default {
       password: process.env.REDIS_PASS || undefined,
     },
   },
-} as ICacheConfig;
-
-// DATADOG - monitora quantas vezes uma chamada está sendo feita no banco para
-// identificar se vale a pena cachear ou nao
+} as unknown) as ICacheConfig;
