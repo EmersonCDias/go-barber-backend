@@ -3,16 +3,22 @@
     "target": "es5",
     "module": "commonjs",
     "strict": true,
+    "strictPropertyInitialization": false,
+    "allowJs": true,
     "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "experimentalDecorators": true,
-    "emitDecoratorMetadata": true
+    "typeRoots": [
+      "node_modules/@types",
+      "src/@types/express.d.ts"
+    ],
   },
-  "include" : [
-    "src/**/*.ts"
+  "include": [
+    "./src",
   ],
-  "exclude" : [
+  "exclude": [
     "node_modules"
   ]
 }
