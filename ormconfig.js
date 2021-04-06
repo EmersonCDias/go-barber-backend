@@ -7,6 +7,11 @@ module.exports = [
     database: `${process.env.POSTGRES_DB}`,
     username: `${process.env.POSTGRES_USERNAME}`,
     password: `${process.env.POSTGRES_PASS}`,
+    extra: {
+      ssl: {
+        rejectUnauthorized: false
+      }
+    },
     entities: [
       "src/modules/**/infra/typeorm/entities/*.ts"
     ],
