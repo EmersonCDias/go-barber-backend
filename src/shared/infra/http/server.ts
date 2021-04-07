@@ -1,12 +1,13 @@
 // import 'reflect-metadata';
 // import 'dotenv/config';
-import express, { Request, Response, NextFunction, response } from 'express';
+// import express, { Request, Response, NextFunction, response } from 'express';
+import express, { Request, Response } from 'express';
 // import 'express-async-errors';
 // import cors from 'cors';
 // import { errors } from 'celebrate';
 //
 // import uploadConfig from '../../../config/upload';
-import AppErrors from '../../errors/AppErrors';
+// import AppErrors from '../../errors/AppErrors';
 
 // import rateLimiter from './middlewares/rateLimiter';
 // import routes from './routes';
@@ -39,7 +40,8 @@ const app = express();
 //
 // app.listen(process.env.PORT || 3333);
 
-app.use('*', (req, res) => {
+const PORT: string | number = process.env.PORT || 5000;
+app.use('*', (req: Request, res: Response) => {
   res.send('<h1>Welcome to your simple server! Awesome right</h1>');
 });
 
