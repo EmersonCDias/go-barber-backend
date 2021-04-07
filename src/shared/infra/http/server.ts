@@ -42,7 +42,7 @@ const app = express();
 
 const PORT: string | number = process.env.PORT || 5000;
 
-app.use('*', (req: Request, res: Response) => {
+app.use('*', (err: Error, req: Request, res: Response) => {
   res.status(500).json({
     status: 'error',
     msg: 'Internal server erro',
