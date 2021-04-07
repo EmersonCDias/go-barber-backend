@@ -3,12 +3,12 @@
 import express, { Request, Response, NextFunction, response } from 'express';
 import 'express-async-errors';
 // import cors from 'cors';
-// import { errors } from 'celebrate';
+import { errors } from 'celebrate';
 
-// import uploadConfig from '../../../config/upload';
+import uploadConfig from '../../../config/upload';
 // import AppErrors from '../../errors/AppErrors';
 
-// import rateLimiter from './middlewares/rateLimiter';
+import rateLimiter from './middlewares/rateLimiter';
 // import routes from './routes';
 
 // import '../typeorm';
@@ -18,10 +18,10 @@ const app = express();
 
 // app.use(cors());
 app.use(express.json());
-// app.use('/files', express.static(uploadConfig.uploadsFolder));
-// app.use(rateLimiter);
+app.use('/files', express.static(uploadConfig.uploadsFolder));
+app.use(rateLimiter);
 // app.use(routes);
-// app.use(errors());
+app.use(errors());
 
 app.use((err: Error, req: Request, res: Response, _: NextFunction) => {
   // if (err instanceof AppErrors) {
