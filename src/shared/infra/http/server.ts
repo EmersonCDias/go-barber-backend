@@ -7,7 +7,7 @@ import express, { Request, Response, NextFunction, response } from 'express';
 // import { errors } from 'celebrate';
 //
 // import uploadConfig from '../../../config/upload';
-// import AppErrors from '../../errors/AppErrors';
+import AppErrors from '../../errors/AppErrors';
 
 // import rateLimiter from './middlewares/rateLimiter';
 // import routes from './routes';
@@ -25,12 +25,12 @@ const app = express();
 // app.use(errors());
 //
 app.use((err: Error, req: Request, res: Response, _: NextFunction) => {
-  // if (err instanceof AppErrors) {
-  //   return res.status(err.statusCode).json({
-  //     status: 'error',
-  //     msg: err.msg,
-  //   });
-  // }
+  if (err instanceof AppErrors) {
+    return res.status(err.statusCode).json({
+      status: 'error',
+      msg: err.msg,
+    });
+  }
 
   console.log('req', req);
   console.log('res', res);
@@ -42,16 +42,3 @@ app.use((err: Error, req: Request, res: Response, _: NextFunction) => {
 });
 
 app.listen(process.env.PORT || 3333);
-
-// const PORT: string | number = process.env.PORT || 5000;
-//
-// app.use('*', (req: Request, res: Response) => {
-//   console.log('res', req);
-//   console.log('res', res);
-//   response.status(500).json({
-//     status: 'error',
-//     msg: 'Internal server error 1',
-//   });
-// });
-//
-// app.listen(PORT, () => console.log(`hosting @${PORT}`));
