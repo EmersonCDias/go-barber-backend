@@ -1,6 +1,7 @@
 // import 'reflect-metadata';
 // import 'dotenv/config';
-import express, { Request, Response, NextFunction, response } from 'express';
+// import express, { Request, Response, NextFunction, response } from 'express';
+import express from 'express';
 import 'express-async-errors';
 // import cors from 'cors';
 // import { errors } from 'celebrate';
@@ -23,21 +24,29 @@ const app = express();
 // app.use(routes);
 // app.use(errors());
 
-app.use((err: Error, req: Request, res: Response, _: NextFunction) => {
-  // if (err instanceof AppErrors) {
-  //   return res.status(err.statusCode).json({
-  //     status: 'error',
-  //     msg: err.msg,
-  //   });
-  // }
+// app.use((err: Error, req: Request, res: Response, _: NextFunction) => {
+//   // if (err instanceof AppErrors) {
+//   //   return res.status(err.statusCode).json({
+//   //     status: 'error',
+//   //     msg: err.msg,
+//   //   });
+//   // }
+//
+//   console.log('req', req);
+//   console.log('res', res);
+//
+//   return response.status(500).json({
+//     status: 'error',
+//     msg: 'Internal server error 1',
+//   });
+// });
+//
+// app.listen(process.env.PORT || 3333);
 
-  console.log('req', req);
-  console.log('res', res);
+const PORT: string | number = process.env.PORT || 5000;
 
-  return response.status(500).json({
-    status: 'error',
-    msg: 'Internal server error 1',
-  });
+app.use('*', (req, res) => {
+  res.send('<h1>Welcome to your simple server! Awesome right</h1>');
 });
 
-app.listen(process.env.PORT || 3333);
+app.listen(PORT, () => console.log(`hosting @${PORT}`));
