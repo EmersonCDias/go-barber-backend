@@ -23,24 +23,24 @@ const app = express();
 // app.use(routes);
 // app.use(errors());
 //
-app.use((err: Error, req: Request, res: Response, _: NextFunction) => {
-  if (err instanceof AppErrors) {
-    return res.status(err.statusCode).json({
-      status: 'error',
-      msg: err.msg,
-    });
-  }
-
-  return response.status(500).json({
-    status: 'error',
-    msg: 'Internal server erro',
-  });
-});
-
-app.listen(process.env.PORT || 3333);
-
-// app.use('*', (req, res) => {
-//   res.send('<h1>Welcome to your simple server! Awesome right</h1>');
+// app.use((err: Error, req: Request, res: Response, _: NextFunction) => {
+//   if (err instanceof AppErrors) {
+//     return res.status(err.statusCode).json({
+//       status: 'error',
+//       msg: err.msg,
+//     });
+//   }
+//
+//   return response.status(500).json({
+//     status: 'error',
+//     msg: 'Internal server erro',
+//   });
 // });
 //
-// app.listen(PORT, () => console.log(`hosting @${PORT}`));
+// app.listen(process.env.PORT || 3333);
+
+app.use('*', (req, res) => {
+  res.send('<h1>Welcome to your simple server! Awesome right</h1>');
+});
+
+app.listen(PORT, () => console.log(`hosting @${PORT}`));
