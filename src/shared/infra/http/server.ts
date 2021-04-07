@@ -1,8 +1,9 @@
 // import 'reflect-metadata';
 // import 'dotenv/config';
-import express, { Request, Response, NextFunction, response } from 'express';
+// import express, { Request, Response, NextFunction, response } from 'express';
+import express from 'express';
 import 'express-async-errors';
-// import cors from 'cors';
+import cors from 'cors';
 // import { errors } from 'celebrate';
 
 // import uploadConfig from '../../../config/upload';
@@ -16,36 +17,36 @@ import 'express-async-errors';
 
 const app = express();
 
-// app.use(cors());
+app.use(cors());
 app.use(express.json());
 // app.use('/files', express.static(uploadConfig.uploadsFolder));
 // app.use(rateLimiter);
 // app.use(routes);
 // app.use(errors());
 
-app.use((err: Error, req: Request, res: Response, _: NextFunction) => {
-  // if (err instanceof AppErrors) {
-  //   return res.status(err.statusCode).json({
-  //     status: 'error',
-  //     msg: err.msg,
-  //   });
-  // }
-
-  console.log('req', req);
-  console.log('res', res);
-
-  return response.status(500).json({
-    status: 'error',
-    msg: 'Internal server error 1',
-  });
-});
-
-app.listen(process.env.PORT || 3333);
-
-// const PORT: string | number = process.env.PORT || 5000;
+// app.use((err: Error, req: Request, res: Response, _: NextFunction) => {
+//   // if (err instanceof AppErrors) {
+//   //   return res.status(err.statusCode).json({
+//   //     status: 'error',
+//   //     msg: err.msg,
+//   //   });
+//   // }
 //
-// app.use('*', (req, res) => {
-//   res.send('<h1>Welcome to your simple server! Awesome right</h1>');
+//   console.log('req', req);
+//   console.log('res', res);
+//
+//   return response.status(500).json({
+//     status: 'error',
+//     msg: 'Internal server error 1',
+//   });
 // });
 //
-// app.listen(PORT, () => console.log(`hosting @${PORT}`));
+// app.listen(process.env.PORT || 3333);
+
+const PORT: string | number = process.env.PORT || 5000;
+
+app.use('*', (req, res) => {
+  res.send('<h1>Welcome to your simple server! Awesome right</h1>');
+});
+
+app.listen(PORT, () => console.log(`hosting @${PORT}`));
