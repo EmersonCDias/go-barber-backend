@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 // import 'reflect-metadata';
 // import 'dotenv/config';
 import express, { Request, Response, NextFunction, response } from 'express';
@@ -32,17 +31,13 @@ app.use((err: Error, req: Request, res: Response, _: NextFunction) => {
     });
   }
 
-  console.log('==========>', err);
-
   return response.status(500).json({
     status: 'error',
     msg: 'Internal server erro',
   });
 });
 
-app.listen(process.env.PORT || 3333, () =>
-  console.log('Server running at port 3333!'),
-);
+app.listen(process.env.PORT || 3333);
 
 // app.use('*', (req, res) => {
 //   res.send('<h1>Welcome to your simple server! Awesome right</h1>');
